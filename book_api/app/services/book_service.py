@@ -8,7 +8,7 @@ class BookService:
     def create_book(self, book_data):
         book = Book(
             title=book_data['title'],
-            author=book_data['author']
+            author_id=book_data['author_id']
         )
         self.book_repository.save(book)
         return book
@@ -20,9 +20,9 @@ class BookService:
         book = self.get_book(book_id)
         if not book:
             return False
-
+        print(book_data)
         book.title = book_data['title']
-        book.author = book_data['author']
+        book.author_id = book_data['author_id']
         self.book_repository.save(book)
         return book
 

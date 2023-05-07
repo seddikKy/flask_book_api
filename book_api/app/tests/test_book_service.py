@@ -16,19 +16,19 @@ class TestBookService:
         with app.app_context():
             book_data = {
                 'title': 'Test Book',
-                'author': 'Test Author'
+                'author_id': 1
             }
             book = book_service.create_book(book_data)
             assert isinstance(book, Book)
             assert book.id is not None
             assert book.title == 'Test Book'
-            assert book.author == 'Test Author'
+            assert book.author_id == 1
 
     def test_get_book(self, app, book_service):
         with app.app_context():
             book_data = {
                 'title': 'Test Book',
-                'author': 'Test Author'
+                'author_id': 1
             }
             book = book_service.create_book(book_data)
             retrieved_book = book_service.get_book(book.id)
@@ -38,23 +38,23 @@ class TestBookService:
         with app.app_context():
             book_data = {
                 'title': 'Test Book',
-                'author': 'Test Author'
+                'author_id': 1
             }
             book = book_service.create_book(book_data)
             update_data = {
                 'title': 'New Test Book',
-                'author': 'New Test Author'
+                'author_id': 2
             }
             updated_book = book_service.update_book(book.id, update_data)
             assert updated_book == book_service.get_book(book.id)
             assert updated_book.title == 'New Test Book'
-            assert updated_book.author == 'New Test Author'
+            assert updated_book.author_id == 2
 
     def test_delete_book(self, app, book_service):
         with app.app_context():
             book_data = {
                 'title': 'Test Book',
-                'author': 'Test Author'
+                'author_id': 1
             }
             book = book_service.create_book(book_data)
             deleted_book = book_service.delete_book(book.id)
@@ -63,10 +63,10 @@ class TestBookService:
 
     def test_get_all_books(self, app, book_service):
         with app.app_context():
-            book_data1 = {'title': 'Test Book 1', 'author': 'Test Author 1'}
+            book_data1 = {'title': 'Test Book 1', 'author_id': 1}
             book1 = book_service.create_book(book_data1)
 
-            book_data2 = {'title': 'Test Book 2', 'author': 'Test Author 2'}
+            book_data2 = {'title': 'Test Book 2', 'author_id': 2}
             book2 = book_service.create_book(book_data2)
 
             books = book_service.get_all_books()
